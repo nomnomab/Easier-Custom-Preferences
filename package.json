@@ -1,6 +1,6 @@
 {
   "name": "com.nomnom.easier-custom-preferences",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "displayName": "Easier Custom Preferences",
   "description": "Makes adding a custom preferences panel easier.",
   "unity": "2020.3",

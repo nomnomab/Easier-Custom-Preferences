@@ -9,6 +9,8 @@ namespace Nomnom.EasierCustomPreferences.Editor {
 				(PreferencesNameAttribute) type.GetCustomAttribute(typeof(PreferencesNameAttribute));
 			PreferencesScopeAttribute scopeAttribute =
 				(PreferencesScopeAttribute) type.GetCustomAttribute(typeof(PreferencesScopeAttribute));
+			PreferencesKeywordAttribute keywordAttribute =
+				(PreferencesKeywordAttribute) type.GetCustomAttribute(typeof(PreferencesKeywordAttribute));
 
 			if (nameAttribute == null) {
 				throw new Exception("A preference window is missing a PreferencesNameAttribute");
@@ -48,7 +50,8 @@ namespace Nomnom.EasierCustomPreferences.Editor {
 					if (EditorGUI.EndChangeCheck()) {
 						onSerializeFunc.Invoke(null, new[] {obj});
 					}
-				}
+				},
+				keywords = keywordAttribute?.Keywords ?? Array.Empty<string>()
 			};
 
 			return settingsProvider;
