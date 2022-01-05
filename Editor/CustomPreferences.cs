@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace Nomnom.EasierCustomPreferences.Editor {
 	public static class CustomPreferences {
-		public static SettingsProvider GetProvider(Type type) {
+		public static SettingsProvider GetProvider(Type type, bool autoSerialize = true) {
 			PreferencesNameAttribute nameAttribute =
 				(PreferencesNameAttribute) type.GetCustomAttribute(typeof(PreferencesNameAttribute));
 			PreferencesScopeAttribute scopeAttribute =
@@ -45,10 +45,16 @@ namespace Nomnom.EasierCustomPreferences.Editor {
 			) {
 				label = nameAttribute.Name,
 				guiHandler = ctx => {
-					EditorGUI.BeginChangeCheck();
+					if (autoSerialize) {
+						EditorGUI.BeginChangeCheck();
+					}
+
 					onGUIFunc.Invoke(null, new[] {ctx, obj});
-					if (EditorGUI.EndChangeCheck()) {
-						onSerializeFunc.Invoke(null, new[] {obj});
+
+					if (autoSerialize) {
+						if (EditorGUI.EndChangeCheck()) {
+							onSerializeFunc.Invoke(null, new[] {obj});
+						}
 					}
 				},
 				keywords = keywordAttribute?.Keywords ?? Array.Empty<string>()
