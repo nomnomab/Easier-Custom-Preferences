@@ -1,0 +1,16 @@
+{
+  "name": "com.nomnom.easier-custom-preferences.Editor",
+  "rootNamespace": "Nomnom.EasierCustomPreferences",
+  "references": [],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
