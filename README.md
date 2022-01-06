@@ -43,3 +43,8 @@ public class Settings {
 	public int Number;
 }
 ```
+
+#### Attributes
+- `PreferencesName` - The name and path of the window
+- `PreferencesScope` - Determines if the window is shown through the user scope or project scope
+- `PreferencesKeywords` - The keywords that will be used for searching

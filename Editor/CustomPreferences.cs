@@ -9,8 +9,8 @@ namespace Nomnom.EasierCustomPreferences.Editor {
 				(PreferencesNameAttribute) type.GetCustomAttribute(typeof(PreferencesNameAttribute));
 			PreferencesScopeAttribute scopeAttribute =
 				(PreferencesScopeAttribute) type.GetCustomAttribute(typeof(PreferencesScopeAttribute));
-			PreferencesKeywordAttribute keywordAttribute =
-				(PreferencesKeywordAttribute) type.GetCustomAttribute(typeof(PreferencesKeywordAttribute));
+			PreferencesKeywordsAttribute keywordsAttribute =
+				(PreferencesKeywordsAttribute) type.GetCustomAttribute(typeof(PreferencesKeywordsAttribute));
 
 			if (nameAttribute == null) {
 				throw new Exception("A preference window is missing a PreferencesNameAttribute");
@@ -39,8 +39,11 @@ namespace Nomnom.EasierCustomPreferences.Editor {
 				throw new Exception("A preference window is missing a valid OnGUI method");
 			}
 
+			string path = string.IsNullOrEmpty(nameAttribute.Path)
+				? nameAttribute.Name
+				: $"{nameAttribute.Path}/{nameAttribute.Name}";
 			SettingsProvider settingsProvider = new SettingsProvider(
-				$"Preferences/{nameAttribute.Name}",
+				$"Preferences/{path}",
 				scopeAttribute?.Scope ?? SettingsScope.User
 			) {
 				label = nameAttribute.Name,
@@ -57,7 +60,7 @@ namespace Nomnom.EasierCustomPreferences.Editor {
 						}
 					}
 				},
-				keywords = keywordAttribute?.Keywords ?? Array.Empty<string>()
+				keywords = keywordsAttribute?.Keywords ?? Array.Empty<string>()
 			};
 
 			return settingsProvider;

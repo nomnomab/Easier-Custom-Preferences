@@ -2,10 +2,10 @@
 
 namespace Nomnom.EasierCustomPreferences.Editor {
 	[AttributeUsage(AttributeTargets.Class)]
-	public class PreferencesKeywordAttribute: Attribute {
+	public class PreferencesKeywordsAttribute: Attribute {
 		public readonly string[] Keywords;
 
-		public PreferencesKeywordAttribute(params string[] keywords) {
+		public PreferencesKeywordsAttribute(params string[] keywords) {
 			Keywords = keywords;
 		}
 	}
